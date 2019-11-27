@@ -66,7 +66,7 @@ Christof Schöch (Trier)
 --
 ## Ausgangslage
 <br/>
-* Das "window of opportunity" für TDM in den CLS:<br/>1800-1923/1948(USA: Publ. / EU: Autor); damit:
+* Das "window of opportunity" für TDM in den CLS:<br/>1800-1923/1948 (USA: Publikation / EU: Tod des Autors); damit:
     * Ausreichend große Mengen an gut digitalisierten Texten (Produktion, OCR)
     * Gemeinfrei für die Republikation von Datensätzen (Copyright)
     * Nur hier: Benchmark-Datensätze, Reproduzierbarkeit, SotA
@@ -75,8 +75,8 @@ Christof Schöch (Trier)
 ## Leitfragen
 <br/>
 1. Welche Analysemethoden sind in den CLS weit verbreitet?
-2. Können diese Methoden auf urheberrechtlich unbedenklichen, abgeleiteten Datenformaten angewendet werden?
-3. Welche Datenformate sollten priorisiert werden? 
+2. Welche Informationen sind für die Anwendung dieser Methoden notwendig?
+3. Welche von urheberrechlich geschützten Texten abgeleiteten Datenformate sind dafür geeignet?
 
 
 ---
@@ -131,7 +131,7 @@ Christof Schöch (Trier)
 
 --
 ## Beispiel: Michel Jeury, *Le Monde du Lignus*
-<img src="img/tdmr-format.png" height="500"/>
+<img src="img/tdmr-format2.png" height="500"/>
 <p>Ausschnitt aus einer Term-Dokument-Matrix</p>
 
 
@@ -257,29 +257,55 @@ Christof Schöch (Trier)
 ---
 <br/>
 <br/>
-# Text Re-Use
+# Text Reuse
 
 --
-## Text Re-Use: Beispiel
+## Text Reuse: Beispiel
 <a href="img/pvierth-reuse.jpg"><img src="img/pvierth-reuse.jpg" height="400"/></a>
-<p>Text Re-Use zwischen zwei Chinesischen Romanen (Paul Vierthaler 2019)</p>
+<p>Text Reuse zwischen zwei chinesischen Romanen: The Water Margin (oben), und The Plum in the Golden Vase (unten); Paul Vierthaler 2019</p>
 
 --
-## Text Re-Use: How it works
-<br/>
-* Paarweiser Abgleich kleiner Textsegmente (4-6 Tokens)
-* Fuzzy matching (bspw. mit Levenshtein-Distanz)
-* bei Match wird die Alignierung expandiert
+## Text Reuse: Beispiel
+<a href="img/reuse18a.png"><img src="img/reuse18a.png" height="400"/></a>
+<p>Text reuse zwischen Louis LeComte (1696, links) und Marquis d'Argens (1738, rechts); Horton et al. 2010</p>
 
 --
-## Anforderungen an das Datenformat
+## Text Reuse: How it works
 <br/>
-* Erster Schritt ok: Index der n-Gramme
-* Zweiter Schritt nicht möglich: 
-    * Expandieren der Matches erfordert längere zusammenhängende Abschnitte
-    * Es erfordert, den vollständigen Text zu prüfen
+* Prinzip: Paarweiser Abgleich kurzer Tokensequenzen
+<br/>
+<br/>
+* (1) Indexierung jedes Textes (ohne Stopwords)
+* (2) Identifikation von Matches zwischen Texten, mit Toleranz
+* (3) Matches werden aligniert und expandiert, mit Toleranz
+
+--
+## Beispiel
+<br/>
+>L'**homme** est né **libre**, et **partout** il est dans les **fers**. Tel se **croit** le **maître** des autres, qui ne **laisse** pas d'étre plus **esclave** qu'eux. (Rousseau)
+
+<small>
+    
+| trigram                  | doc | sequence| bytes   |
+|--------------------------|-----|---------|---------|
+|homme_libre_partout       | 755 | 208-213 | 5084-31 |
+|libre_partout_fers        | 755 | 211-218 | 5098-38 |
+|partout_fers_croit        | 755 | 213-221 | 5108-46 |
+|fers_croit_maitre         | 755 | 218-223 | 5132-33 |
+|croit_maitre_laisse       | 755 | 221-228 | 5149-42 |
+|maitre_laisse_esclave     | 755 | 223-233 | 5158-58 |
+
+</small>
 
 
+
+
+--
+## Andere Anforderungen
+<br/>
+* Index der n-Gramme: denkbar, hier nur nicht-Stopwords zu berücksichtigen
+* Expandieren der Matches: längere, zusammenhängende Abschnitte 
+* Prüfen der Treffer: eigentlich nur im Volltext möglich
 
 ---
 <br/>
@@ -288,16 +314,16 @@ Christof Schöch (Trier)
 
 
 --
-## Nutzungsszenarien: ✔
+## Methoden mit Token-basiertem Format ✔
 <br/>
 * ✔ Autorschaftsattribution: Segmentaggregation, Gesamthäufigkeit 
 * ✔ Topic Modeling: Stopwords teilweise Segmentaggregation, Binarisierung, POS-Filter, Lemma-Auswahl
 * ✔ Distinktive Merkmale: teilweise Segmentaggregation, Lemma-Auswahl
+* (✔ Netzwerkanalyse: möglich, wenn Annotation geeignet ist: Figurennamen)
 
 --
-## Nutzungsszenarien: ❌
+## Andere Methoden: sequentielles Format
 <br/>
-* **O** Netzwerkanalyse: mit Einschränkungen; POS-Selektion (Figurennamen), Binarisierung
 * ❌ Text Re-Use: benötigt mehr Kontext
 * ❌ Word Embeddings: benötigt mehr Kontext
 * ❌ Metaphernerkennung: benötigt mehr Kontext
@@ -305,7 +331,7 @@ Christof Schöch (Trier)
 
 
 ---
-# Bibliographie
+## Bibliographie
 <br/>
 
 <small>
@@ -315,8 +341,7 @@ Christof Schöch (Trier)
 Theorie, Implementierung, Fallstudie", *Quantitative Ansätze in den Literatur- und Geisteswissenschaften: Systematische und historische Perspektiven*. Berlin: de Gruyter, 77–94. 
 * Paul Vierthaler and Mees Gelein, "A BLAST-based, Language-agnostic Text Reuse Algorithm with a MARKUS Implementation and Sequence Alignment Optimized for Large Chinese Corpora," *Journal of Cultural Analytics*. March 18, 2019. DOI: https://doi.org/10.31235/osf.io/7xpqe
 * Andrew Mazzaschi et al. (2014): *Signs@40: Feminist Scholarship through Four Decades*, http://signsat40.signsjournal.org/topic-model/.
-
-
+* Russell Horton, Mark Olsen, Glenn Roe (2010), "Something Borrowed: Sequence Alignment and the Identification of Similar Passages in Large Text Collections", *Digital Studies - Le Champ numérique* 2.1., URL: https://www.digitalstudies.org/articles/10.16995/dscn.258/
 
 </small>
 
