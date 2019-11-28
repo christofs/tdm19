@@ -74,9 +74,11 @@ Christof Schöch (Trier)
 --
 ## Leitfragen
 <br/>
-1. Welche Analysemethoden sind in den CLS weit verbreitet?
-2. Welche Informationen sind für die Anwendung dieser Methoden notwendig?
-3. Welche von urheberrechlich geschützten Texten abgeleiteten Datenformate sind dafür geeignet?
+1. Welche Analysemethoden sind in den CLS weit verbreitet? <!-- .element: class="fragment" data-fragment-index="1" -->
+2. Welche Informationen sind für die Anwendung dieser Methoden notwendig? <!-- .element: class="fragment" data-fragment-index="2" -->
+3. Welche von urheberrechlich geschützten Texten abgeleiteten Datenformate sind dafür geeignet? <!-- .element: class="fragment" data-fragment-index="3" -->
+4. Wie kann nicht nur die eigene Nutzung, sondern auch die Reproduzierbarkeit und Nachnutzung gewährleistet werden? <!-- .element: class="fragment" data-fragment-index="4" -->
+5. TDM-Forschende vs. Bibliotheken <!-- .element: class="fragment" data-fragment-index="5" -->
 
 
 ---
@@ -117,16 +119,16 @@ Christof Schöch (Trier)
 --
 ## Eigenschaften
 <br/>
-* Datenstruktur 
+* Datenstruktur  <!-- .element: class="fragment" data-fragment-index="1" -->
     * Term-Dokument-Matrix oder (JSON-Datei)
     * 1 Text = 1 Datei
-* Segmentierung 
+* Segmentierung  <!-- .element: class="fragment" data-fragment-index="2" -->
     * kleinteilig, bspw. 100 / 500 Wörter
     * kleine Segmente => Sparseness, Dateigröße
-* Merkmale 
+* Merkmale  <!-- .element: class="fragment" data-fragment-index="3" -->
     * Wortform, POS, Lemma: Häufigkeit pro Segment
     * Disambiguieren / Filtern / Aggregieren
-* Rekonstruierbarkeit des Textes: eindeutig ausgeschlossen
+* Rekonstruierbarkeit des Textes: eindeutig ausgeschlossen <!-- .element: class="fragment" data-fragment-index="4" -->
 
 
 --
@@ -167,9 +169,9 @@ Christof Schöch (Trier)
 * Topic Modeling
 * Distinktive Merkmale
 * Text Reuse
-* Netzwerkanalyse
-* Word Embedding Models 
-* Metaphernerkennung
+* (Netzwerkanalyse)
+* (Word Embedding Models) 
+* (Metaphernerkennung)
 * ...
 
 
@@ -188,6 +190,7 @@ Christof Schöch (Trier)
 <br/>
 * Prinzip: Textähnlichkeit, d.h.: bag-of-words, Vektorraum, Distanzmaße
 * Parameter: Segmentierung, Liste der Merkmale, (Distanzmaß)
+* "Erkennbarkeit"!
 
 --
 ## Autorschaftsattribution: Datenformat
@@ -297,15 +300,14 @@ Christof Schöch (Trier)
 
 </small>
 
-
-
-
 --
 ## Andere Anforderungen
 <br/>
 * Index der n-Gramme: denkbar, hier nur nicht-Stopwords zu berücksichtigen
 * Expandieren der Matches: längere, zusammenhängende Abschnitte 
 * Prüfen der Treffer: eigentlich nur im Volltext möglich
+* Hier sind Inhaltswörter ausreichend, das ist aber ein Spezialfall
+
 
 ---
 <br/>
@@ -314,7 +316,7 @@ Christof Schöch (Trier)
 
 
 --
-## Methoden mit Token-basiertem Format ✔
+## Token-basiertem Format ✔
 <br/>
 * ✔ Autorschaftsattribution: Segmentaggregation, Gesamthäufigkeit 
 * ✔ Topic Modeling: Stopwords teilweise Segmentaggregation, Binarisierung, POS-Filter, Lemma-Auswahl
@@ -322,11 +324,11 @@ Christof Schöch (Trier)
 * (✔ Netzwerkanalyse: möglich, wenn Annotation geeignet ist: Figurennamen)
 
 --
-## Andere Methoden: sequentielles Format
+## N-Gramme
 <br/>
-* ❌ Text Re-Use: benötigt mehr Kontext
-* ❌ Word Embeddings: benötigt mehr Kontext
-* ❌ Metaphernerkennung: benötigt mehr Kontext
+* ❌ Text Re-Use: nur teilweise, benötigt mehr Kontext
+* ❌ Word Embeddings: benötigt mehr Kontext, könnten aber als solche publiziert werden
+* ❌ Metaphernerkennung  (kreative Formulierungen!): benötigt mehr Kontext
 
 
 
